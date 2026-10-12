@@ -36,27 +36,7 @@
             align-items: center;
             justify-content: center;
         }
-        /* 
         
-        .hero-header {
-            position: relative;
-            width: 100vw;              /* Ancho total de la pantalla */
-            height: 320px;             /* Alto exacto de 320 píxeles */
-            margin-left: calc(-50vw + 50%); /* Rompe los márgenes de Bootstrap para tocar los bordes */
-            margin-right: calc(-50vw + 50%);
-            margin-bottom: 2rem; 
-            
-            /* CORREGIDO: Se eliminó la barra diagonal del inicio */
-            background-image: url('img/fondomusica.png');      
-            background-size: cover;    
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        } 
-        */
-
         /* Capa oscura translúcida para que el texto resalte */
         .hero-overlay {
             position: absolute;
@@ -71,6 +51,21 @@
             position: relative;
             z-index: 2;
         }
+        /* ADAPTACIÓN PARA CELULARES (Pantallas menores a 768 píxeles de ancho) */
+    @media (max-width: 768px) {
+        .hero-header {
+            height: 180px; /* Reducimos la altura a 180px para que no sobre espacio en el celular */
+        }
+
+        /* Opcional: Hacemos un poco más pequeño el texto del título en celulares para que luzca mejor */
+        .hero-header h1 {
+            font-size: 1.5rem !important; 
+        }
+        
+        .hero-header p {
+            font-size: 0.9rem;
+        }
+    }
     </style>
   </head>
   <body>
