@@ -1,13 +1,18 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Musica Venezolana</title>
-    <!-- CSS de Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- CSS Adicional Personalizado -->
-    <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/flick/jquery-ui.css">
+  <link rel="stylesheet" href="css/audio-player.css">
+  <title>Musica Venezolana</title>
+
+  <style>
         body {
             /* Color café claro / Beige cálido */
             background-color: #e0821d; 
@@ -15,49 +20,50 @@
         .hero-header {
             position: relative;
             width: 100vw;            
-            height: 580px;             
+            height: 580px;            
             margin-left: calc(-50vw + 50%); 
             margin-right: calc(-50vw + 50%);
             margin-bottom: 2rem; 
             
-            background-image: url('img/fondomusica.png');      
-            
-            /* CAMBIO CLAVE AQUÍ: 'contain' muestra la imagen completa sin recortarla */
-            background-size: contain;    
-            background-position: center;
-            
-            /* Evita que la imagen se multiplique si sobra espacio */
-            background-repeat: no-repeat; 
-            
-            /* Color de respaldo por si queda espacio a los lados */
-            background-color: #2b1d14; 
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            background-image: url('img/fondomusica.png');          
         
-        /* Capa oscura translúcida para que el texto resalte */
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.45); /* 45% de oscuridad */
-        }
+        /* 'contain' muestra la imagen completa sin recortarla */
+        background-size: contain;    
+        background-position: center;
+        
+        /* Evita que la imagen se multiplique si sobra espacio */
+        background-repeat: no-repeat; 
+        
+        /* Color de respaldo por si queda espacio a los lados */
+        background-color: #2b1d14; 
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        /* ADAPTACIÓN PARA CELULARES (Pantallas menores a 768 píxeles de ancho) */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Estilos personalizados para las tarjetas de canciones */
+    .song-card {
+        background-color: #fff8f0;
+        border: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .song-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* ADAPTACIÓN PARA CELULARES (Pantallas menores a 768 píxeles de ancho) */
     @media (max-width: 768px) {
         .hero-header {
             height: 180px; /* Reducimos la altura a 180px para que no sobre espacio en el celular */
         }
 
-        /* Opcional: Hacemos un poco más pequeño el texto del título en celulares para que luzca mejor */
         .hero-header h1 {
             font-size: 1.5rem !important; 
         }
@@ -66,31 +72,152 @@
             font-size: 0.9rem;
         }
     }
-    </style>
-  </head>
-  <body>
-    <!-- Contenedor principal que mantiene el contenido alineado -->
-    <div class="container">
-        
-        <!-- Imagen de encabezado de ancho completo (320px de alto) -->
-        <header class="hero-header">
-            <div class="hero-overlay"></div>
-            <div class="hero-content text-center text-white">
-                <h1 class="display-5 fw-bold">Repertorio Musical Interactivo</h1>
-                <p class="lead">Descubre la música, autores y su historia</p>
-            </div>
-        </header>
+     .bg-mosaico-card {
+        /* Reemplaza esta URL por la de tu imagen de patrón/mosaico */
+        background-image: url('https://transparenttextures.com');
+        background-repeat: repeat;
+        background-position: top left;
+        background-size: auto; /* Mantiene el tamaño original de la textura para que repita bien */
+    }
 
-        <!-- Aquí abajo irá el resto de tu repertorio (tarjetas, etc.) -->
-        <div class="row">
-            <div class="col-md-12 text-center text-white">
-                <p>Próximamente aquí las tarjetas de las obras musicales...</p>
-            </div>
+    /* Esto asegura que el contenido dentro de la tarjeta mantenga buena legibilidad */
+    .bg-mosaico-card .audio-player {
+        background-color: rgba(255, 255, 255, 0.92); /* Capa blanca para que el reproductor no se confunda con el fondo */
+        border-radius: 0.5rem;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+</style>
+</head>
+<body>
+<!-- <div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/other/Bootstrap-Audio-Player-Playlist-jQuery.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+
+</script>//-->
+<!-- Imagen de encabezado -->
+    <header class="hero-header">
+        <div class="hero-overlay"></div>
+        <div class="hero-content text-center text-white">
+            <!-- Puedes poner texto aquí si lo deseas -->
         </div>
+    </header>
+    <!-- Listado del Repertorio de Canciones -->
+     
+    <main class="mb-5">        <!-- contenedor principal -->
+      
+        <div class="list-group shadow">
+            <!-- Canción 1 (Con tu enlace de Google Drive integrado) -->
+            <div class="list-group-item song-card d-flex flex-column flex-md-row justify-content-between align-items-md-center p-3 mb-2 rounded">
+                <section class="audio-player card w-100" style="margin-top:20px"> <!-- AQUÍ HICE EL CAMBIO: Añadida la clase w-100 -->             
+    <div class="card w-100"> 
+      <div class="card text-center">
+      <div class="card-header">
+    <h2>Repertorio Muiscal Venezoloano</h2>
+  </div>
+  </div>
+      <div class="card-body">
+        <!-- <h2 class="card-title col text-center">Repertorio Musical</h2> -->
+        <div class="row align-items-center mt-4 mb-3 mx-0">
+          <i id="play-button"class="material-icons play-pause text-primary mr-2" aria-hidden="true">play_circle_outline</i>
+          <i id="pause-button"class="material-icons play-pause d-none text-primary mr-2" aria-hidden="true">pause_circle_outline</i>
+          <i id="next-button"class="material-icons text-primary ml-2 mr-3" aria-hidden="true">skip_next</i>
+          
+        </div>
+        <div class="p-0 m-0" id="now-playing">
+          <p class="font-italic mb-0">ahora sonando: </p>
+          <p class="lead" id="title"></p>
+          <p class="lead font-italic text-muted" id="sinopsis" style="font-size: 1rem;"></p> <!-- AQUÍ HICE EL CAMBIO: Elemento de sinopsis listo para recibir texto -->
+        </div>
+        <div class="progress-bar progress col-12 mb-3">
+        </div>
+      </div>
+      <ul class="playlist list-group list-group-flush">
+        <!-- AQUÍ HICE EL CAMBIO: Se agregó el atributo sinopsis="" a cada elemento de la lista -->
+        <li audio_url="https://ia601800.us.archive.org/18/items/ansiedad_202610/Ansiedad.mp3"
+        img_url="https://lorempixel.com/400/400/cats/1"
+        sinopsis="La canción «Ansiedad» fue escrita en 1955 por el compositor venezolano José Enrique «Chelique» Sarabia, y fue grabada y popularizada 
+        por Nat King Cole en 1958 (formando parte de su álbum Cole Español / To My Friends) y lanzada internacionalmente en 1959."
+        class="active list-group-item playlist-item">
+        Ansiedad</li>
+        
+        <li audio_url="https://ia601005.us.archive.org/32/items/en-carne-viva/En%20carne%20viva.mp3"
+        class="list-group-item playlist-item"
+        img_url="https://lorempixel.com/400/400/cats/4"
+        sinopsis="En carne viva es el título del 23º. Álbum de estudio grabado y realizado por el artista español Raphael. Fue lanzado al mercado por la compañía discográfica Hispavox en 1981, este álbum fue producido, dirigido y orquestado por el compositor español Manuel Alejandro. La letra 
+        habla del dolor profundo, la vulnerabilidad y el desgarro emocional que deja una ruptura amorosa reciente, donde la herida sigue abierta y recordar a la otra persona resulta devastador."
+        class="active list-group-item playlist-item">
+        En Carne Viva </li>
+        
+        <li audio_url="https://ia601001.us.archive.org/18/items/mi-burrito-sabanero_202610/Mi%20burrito%20Sabanero.mp3"
+        class="list-group-item playlist-item"
+        img_url="https://lorempixel.com/400/400/cats/3"
+        sinopsis="Conocido originalmente como «El burrito de Belén») es un famoso villancico navideño venezolano. Fue grabada primero por el folclorista venezolano Simón Díaz, incluida en su disco Las gaitas de Simón y 
+        luego se grabó con el grupo musical infantil venezolano La Rondallita en noviembre de 1975 con la voz solista del niño Ricardo Cuenci, siendo esta última versión la que alcanzó gran popularidad en varios países de Hispanoamérica y Europa."
+        class="active list-group-item playlist-item">
+       Mi Burrito Sabanero </li>
+      </ul>
+      </div>
+  
+  <audio id="audio-player" class="d-none" src="" type="audio/mp3" controls="controls"></audio>
+</section>   
+</div>
+</div>
+</main>      
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
+<script src="js/jquery-ui-slider.js" charset="utf-8"></script>
+<script src="js/audioPlayer.js" charset="utf-8"></script>
+<script type="text/javascript">
 
-    </div>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
 
-    <!-- JS de Bootstrap corregido con la URL completa -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- AQUÍ HICE EL CAMBIO: Script añadido para actualizar dinámicamente la sinopsis al hacer clic o cambiar de canción -->
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Función para actualizar la sinopsis basada en el elemento activo o seleccionado
+    function actualizarSinopsis() {
+      var sinopsisActual = $('.playlist-item.active').attr('sinopsis');
+      if (sinopsisActual) {
+        $('#sinopsis').text(sinopsisActual);
+      } else {
+        $('#sinopsis').text('');
+      }
+    }
+
+    // Ejecutar al cargar la página para la canción inicial
+    actualizarSinopsis();
+
+    // Escuchar clics en los elementos de la lista de reproducción
+    $('.playlist-item').on('click', function() {
+      // Damos un pequeño retraso para asegurar que el plugin de audio marque la clase 'active'
+      setTimeout(actualizarSinopsis, 50);
+    });
+
+    // Escuchar el botón de siguiente por si cambia automáticamente
+    $('#next-button').on('click', function() {
+      setTimeout(actualizarSinopsis, 50);
+    });
+  });
+</script>
+</body>
 </html>
+
