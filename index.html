@@ -14,23 +14,23 @@
 <style>
      body {
          /* Color café claro / Beige cálido */
-         background-color: #e0821d;  
+         background-color: #ffffff;  
      }
      .hero-header {
          position: relative;
-         width: 100vw;                     
-         height: 580px;                     
+         width: 100vw;               
+         height: 580px;               
          margin-left: calc(-50vw + 50%);              
          margin-right: calc(-50vw + 50%);             
-         margin-bottom: 2rem;                         
+         margin-bottom: 2rem;                                 
          background-image: url('img/fondomusica.png');                            
          /* 'contain' muestra la imagen completa sin recortarla */
          background-size: contain;            
-         background-position: center;                  
+         background-position: center;                
          /* Evita que la imagen se multiplique si sobra espacio */
-         background-repeat: no-repeat;                 
+         background-repeat: no-repeat;               
          /* Color de respaldo por si queda espacio a los lados */
-         background-color: #2b1d14;           
+         background-color: #2b1d14;          
          display: flex;
          align-items: center;
          justify-content: center;
@@ -60,6 +60,23 @@
          vertical-align: middle;
      }
 
+     /* NUEVO: Estilo para el cuadro contenedor de la imagen junto al botón next */
+     .song-image-container {
+         width: 200px;
+         height: 200px;
+         border-radius: 8px;
+         overflow: hidden;
+         border: 2px solid #ddd;
+         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+         background-color: #fff;
+     }
+
+     .song-image-container img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+     }
+
      /* ADAPTACIÓN PARA CELULARES (Pantallas menores a 768 píxeles de ancho) */
      @media (max-width: 768px) {
          .hero-header {
@@ -69,14 +86,19 @@
          .hero-header h1 {
              font-size: 1.5rem !important; 
          }
-               
+             
          .hero-header p {
              font-size: 0.9rem;
          }
-
+             
          /* CORREGIDO: Tamaño adaptado para móviles manteniendo la posición horizontal */
          .play-pause, #next-button {
              font-size: 3.5rem !important;
+         }
+
+         .song-image-container {
+             width: 100px;
+             height: 100px;
          }
      }
 
@@ -123,6 +145,11 @@
           <i id="play-button" class="material-icons play-pause text-primary mr-2" aria-hidden="true">play_circle_outline</i>
           <i id="pause-button" class="material-icons play-pause d-none text-primary mr-2" aria-hidden="true">pause_circle_outline</i>
           <i id="next-button" class="material-icons text-primary ml-2 mr-3" aria-hidden="true">skip_next</i>
+          
+          <!-- NUEVO: Cuadro contenedor para la imagen dinámica al lado de next-button -->
+          <div class="song-image-container ml-2">
+              <img id="current-song-img" src="" alt="Carátula de la canción">
+          </div>
         </div>
         <div class="p-0 m-0" id="now-playing">
           <p class="font-italic mb-0">ahora sonando: </p>
@@ -134,203 +161,224 @@
       </div>
       <ul class="playlist list-group list-group-flush">
         <li audio_url="https://ia601800.us.archive.org/18/items/ansiedad_202610/Ansiedad.mp3"
-        img_url="https://lorempixel.com/400/400/cats/1"
+        img_url="img/Nat King Cole.jpg"
         sinopsis="La canción «Ansiedad» fue escrita en 1955 por el compositor venezolano José Enrique «Chelique» Sarabia y fue grabada y popularizada por Nat King Cole en 1958 (formando parte de su álbum Cole Español / To My Friends) y lanzada internacionalmente en 1959."
         class="active list-group-item playlist-item">
         Ansiedad</li>
         
         <li audio_url="https://ia601904.us.archive.org/16/items/en-carne-viva_202610/En%20Carne%20Viva.mp3"
-        img_url="https://lorempixel.com/400/400/cats/4"
+        img_url="img/scarleth.jpg"
         sinopsis="En Carne Viva es un emblemático tema de la música llanera venezolana, interpretado por la cantante Scarlett Linares (conocida como La Guayanesa de Oro) y compuesto originalmente por el músico Manolo Aldana.
          La canción fue grabada en el  año 2003, convirtiéndose en el mayor éxito de la carrera de la artista y en un clásico del folclor contemporáneo."
         class="list-group-item playlist-item">
         En Carne Viva </li>
         
         <li audio_url="https://ia601001.us.archive.org/18/items/mi-burrito-sabanero_202610/Mi%20burrito%20Sabanero.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+        img_url="img/simon.jpg"
         sinopsis="Conocido originalmente como El burrito de Belén, es un famoso villancico navideño venezolano. Fue grabada primero por el folclorista venezolano Simón Díaz, incluida en su disco Las gaitas de Simón y 
         luego se grabó con el grupo musical infantil venezolano La Rondallita en noviembre de 1975 con la voz solista del niño Ricardo Cuenci, siendo esta última versión la que alcanzó gran popularidad en varios países de Hispanoamérica y Europa."
         class="list-group-item playlist-item">
        Mi Burrito Sabanero </li>
 
        <li audio_url="https://ia601608.us.archive.org/28/items/lloraras_202610/Lloraras.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+        img_url="img/oscar.jpg"
         sinopsis="Surgió de manera espontánea una noche de inspiración de Oscar D'León en Caracas, Venezuela. 
         Se convirtió en el primer gran éxito internacional del artista, catapultándolo a la fama mundial como «El Sonero del Mundo». Es un clásico de la salsa que narra una historia de desamor, despecho y advertencia emocional."
         class="list-group-item playlist-item">
        Lloraras </li>
 
        <li audio_url="https://ia601406.us.archive.org/17/items/ano-nuevo/A%C3%B1o%20nuevo.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+        img_url="img/cheo.jpg"
         sinopsis="Aunque fue popularizada masivamente por Billo’s Caracas Boys, la composición es obra del periodista y compositor 
         colombiano Pedro Juan Meléndez Comas (originario de Barranquilla). Durante mucho tiempo apareció en los discos bajo la denominación DRA (Derecho Reservado de Autor) por un error de imprenta de la disquera."
         class="list-group-item playlist-item">
        Año Nuevo </li>
 
        <li audio_url="https://ia600407.us.archive.org/10/items/canto-a-caracas/canto%20a%20caracas.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+        img_url="img/billo.jpg"
         sinopsis="Popularizada por la orquesta Billo's Caracas Boys (con voces como Cheo García y Felipe Pirela) y versionada por diversos artistas como Simón Díaz o La Lupe. La letra expresa el profundo afecto,
          agradecimiento y sentido de pertenencia del autor hacia Caracas, la ciudad donde vivió gran parte de su vida.  En su estrofa más famosa, la canción refleja un emotivo deseo del autor, quien pide que al morir no le reciten una oración sobre su tumba, sino que se escuche el último compás de Alma llanera."
         class="list-group-item playlist-item">
        Cantos a Caracas </li>
 
-	<li audio_url="https://dn711409.ca.archive.org/0/items/pavo-real/Pavo%20Real.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn711409.ca.archive.org/0/items/pavo-real/Pavo%20Real.mp3"
+        img_url="img/jose.jpg"
         sinopsis="La letra es una sátira o reflexión social acerca de la burocracia, las formalidades, la ostentación y los pormenores de los preparativos matrimoniales. Está compuesta bajo la estructura del 
         "seis numerao" (un tipo de joropo tradicional venezolano en compás de 6/8). El término "numerao" hace referencia a la métrica musical y a los versos repetitivos que El Puma inmortalizó en los coros."
         class="list-group-item playlist-item">
        Pavo Real</li>
 
-	<li audio_url="https://dn721807.ca.archive.org/0/items/de-sol-a-sol/De%20sol%20a%20sol.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn721807.ca.archive.org/0/items/de-sol-a-sol/De%20sol%20a%20sol.mp3"
+        img_url="img/salserin.jpg"
         sinopsis="Estos temas son algunos de los éxitos más grandes e icónicos de la famosa agrupación venezolana de salsa infantil y juvenil Salserín, grabados a mediados de la década de 1996 bajo la composición y arreglos de músicos como Manuel Guerra y William Luque. Las canciones alcanzaron una enorme 
         popularidad en toda Latinoamérica y se han mantenido como clásicos de la salsa romántica en nuestro idioma."
         class="list-group-item playlist-item">
-        De sol a sol</li>
+         De sol a sol</li>
 
-	<li audio_url="https://dn710102.ca.archive.org/0/items/yo-sin-ti/Yo%20Sin%20Ti.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn710102.ca.archive.org/0/items/yo-sin-ti/Yo%20Sin%20Ti.mp3"
+        img_url="img/salserin.jpg"
         sinopsis="Estos temas son algunos de los éxitos más grandes e icónicos de la famosa agrupación venezolana de salsa infantil y juvenil Salserín, grabados a mediados de la década de 1996 bajo la composición y arreglos de músicos como Manuel Guerra y William Luque. Las canciones alcanzaron una enorme 
         popularidad en toda Latinoamérica y se han mantenido como clásicos de la salsa romántica en nuestro idioma."
         class="list-group-item playlist-item">
-        Yo sin ti</li>
+         Yo sin ti</li>
 
-	<li audio_url="https://dn711003.ca.archive.org/0/items/un-amor-como-el-nuestro/Un%20Amor%20Como%20El%20Nuestro.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn711003.ca.archive.org/0/items/un-amor-como-el-nuestro/Un%20Amor%20Como%20El%20Nuestro.mp3"
+        img_url="img/salserin.jpg"
         sinopsis="Estos temas son algunos de los éxitos más grandes e icónicos de la famosa agrupación venezolana de salsa infantil y juvenil Salserín, grabados a mediados de la década de 1996 bajo la composición y arreglos de músicos como Manuel Guerra y William Luque. Las canciones alcanzaron una enorme 
         popularidad en toda Latinoamérica y se han mantenido como clásicos de la salsa romántica en nuestro idioma."
         class="list-group-item playlist-item">
-        Un amor como el Nuestro</li>
+         Un amor como el Nuestro</li>
 
-	<li audio_url="https://dn720602.ca.archive.org/0/items/perla-negra/Perla%20Negra.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn720602.ca.archive.org/0/items/perla-negra/Perla%20Negra.mp3"
+        img_url="img/yordano.jpg"
         sinopsis="La letra retrata la historia y el mundo de una trabajadora sexual que ofrece sus servicios a un cliente. 
-	Genero:Pop rock/balada urbana con influencias acústicas y eléctricas. Es una balada sumamente íntima y poética que habla de la melancolía, el desamor y el desahogo emocional tras una noche nostálgica. Estas canciones del mismo artista te van a fascinar porque comparten esa fusión perfecta de pop, ritmos caribeños, melancolía y letras urbanas"
+ Genero:Pop rock/balada urbana con influencias acústicas y eléctricas. Es una balada sumamente íntima y poética que habla de la melancolía, el desamor y el desahogo emocional tras una noche nostálgica. Estas canciones del mismo artista te van a fascinar porque comparten esa fusión perfecta de pop, ritmos caribeños, melancolía y letras urbanas"
         class="list-group-item playlist-item">
-        Perla Negra</li>
+         Perla Negra</li>
 
-	<li audio_url="https://dn711002.ca.archive.org/0/items/manantial-de-corazon/Manantial%20de%20Coraz%C3%B3n.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn711002.ca.archive.org/0/items/manantial-de-corazon/Manantial%20de%20Coraz%C3%B3n.mp3"
+        img_url="img/yordano.jpg"
         sinopsis="La letra retrata la historia y el mundo de una trabajadora sexual que ofrece sus servicios a un cliente. 
-	Genero:Pop rock/balada urbana con influencias acústicas y eléctricas. Es una balada sumamente íntima y poética que habla de la melancolía, el desamor y el desahogo emocional tras una noche nostálgica. Estas canciones del mismo artista te van a fascinar porque comparten esa fusión perfecta de pop, ritmos caribeños, melancolía y letras urbanas"
+ Genero:Pop rock/balada urbana con influencias acústicas y eléctricas. Es una balada sumamente íntima y poética que habla de la melancolía, el desamor y el desahogo emocional tras una noche nostálgica. Estas canciones del mismo artista te van a fascinar porque comparten esa fusión perfecta de pop, ritmos caribeños, melancolía y letras urbanas"
         class="list-group-item playlist-item">
-        Manantial de Corazón</li>
+         Manantial de Corazón</li>
 
-	<li audio_url="https://dn720005.ca.archive.org/0/items/una-carta_202610/Una%20Carta.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn720005.ca.archive.org/0/items/una-carta_202610/Una%20Carta.mp3"
+        img_url="img/terricolas.jpg"
         sinopsis="Es una obra de ficción con una introducción hablada que hizo que el público creyera que se trataba de una vivencia real sobre un amor prohibido y la culpa."
         class="list-group-item playlist-item">
-        La carta</li>
+         La carta</li>
 
-	<li audio_url="https://archive.org/download/te-juro-que-te-amo_202610/Te%20Juro%20Que%20Te%20Amo.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://archive.org/download/te-juro-que-te-amo_202610/Te%20Juro%20Que%20Te%20Amo.mp3"
+        img_url="img/terricolas.jpg"
         sinopsis="La letra de la balada narra una dolorosa y dramática despedida en una estación de tren Está lloviendo y una persona ve partir a su ser amado en un tren, A pesar del sufrimiento y la distancia, el protagonista jura fidelidad eterna y asegura que su amor no cambiará jamás."
         class="list-group-item playlist-item">
-        Te Juro que te Amo</li>
+         Te Juro que te Amo</li>
 
-	<li audio_url="https://ia801804.us.archive.org/34/items/cancion-para-ti/Canci%C3%B3n%20para%20ti.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://ia801804.us.archive.org/34/items/cancion-para-ti/Canci%C3%B3n%20para%20ti.mp3"
+        img_url="img/frank.jpg"
         sinopsis="La letra describe un deseo profundo de conectar con la persona amada a través del mundo,  de los sueños, donde las barreras físicas desaparecen, la canción mezcla ternura con un toque de tristeza y nostalgia, reconociendo
         el impacto de la separación y pidiendo a la otra persona que guarde la promesa de un recuerdo mutuo."
         class="list-group-item playlist-item">
-        Canción Para Ti</li>
+         Canción Para Ti</li>
 
-	<li audio_url="https://dn721901.ca.archive.org/0/items/un-buen-perdedor/Un%20buen%20perdedor.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn721901.ca.archive.org/0/items/un-buen-perdedor/Un%20buen%20perdedor.mp3"
+        img_url="img/franco.jpg"
         sinopsis="La canción narra el dolor y la resignación de un hombre que ve cómo su pareja decide marcharse, en lugar de intentar retenerla a la fuerza o guardar rencor, 
         el protagonista acepta la decisión con dignidad y reconoce que debe dejar ir a la persona amada"
         class="list-group-item playlist-item">
-        Un buen perdedor</li>
+         Un buen perdedor</li>
 
-	<li audio_url="https://dn721809.ca.archive.org/0/items/solo-importas-tu/SOLO%20IMPORTAS%20TU.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn721809.ca.archive.org/0/items/solo-importas-tu/SOLO%20IMPORTAS%20TU.mp3"
+        img_url="img/franco.jpg"
         sinopsis="El tema es una balada romántica introspectiva en la que el narrador pide perdón por haber herido a su pareja, 
         admitiendo que no supo valorar su presencia ni el dolor que ella soportaba en silencio, de su álbum Fantasía"
         class="list-group-item playlist-item">
-        Solo faltas tú</li>
+         Solo faltas tú</li>
 
-	<li audio_url="https://dn721908.ca.archive.org/0/items/te-amo_202610/Te%20Amo.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn721908.ca.archive.org/0/items/te-amo_202610/Te%20Amo.mp3"
+        img_url="img/franco.jpg"
         sinopsis="Es una balada romántica que narra la intensidad, la vulnerabilidad y la urgencia de 
        confesar un amor profundo ante la incertidumbre del tiempo, álbum Al Norte Del Sur"
         class="list-group-item playlist-item">
-        Te amo</li>
+         Te amo</li>
 
-	<li audio_url="https://dn720006.ca.archive.org/0/items/eres-una-en-un-millon-ilan-chester/Eres%20una%20en%20un%20millon%20Ilan%20Chester.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://dn720006.ca.archive.org/0/items/eres-una-en-un-millon-ilan-chester/Eres%20una%20en%20un%20millon%20Ilan%20Chester.mp3"
+        img_url="img/Ilan.jpg"
         sinopsis="La letra expresa una profunda admiración y gratitud hacia una persona especial cuya presencia trae paz y alegría.
       Compara a la persona amada con las estrellas y el sol, destacando que brilla con mucha más fuerza e importancia que cualquier otra cosa a su alrededor."
         class="list-group-item playlist-item">
-        Eres una en un millón</li>
+         Eres una en un millón</li>
 
-	<li audio_url="https://archive.org/download/si-tu-te-vas_202610/Si%20T%C3%BA%20Te%20Vas.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://archive.org/download/si-tu-te-vas_202610/Si%20T%C3%BA%20Te%20Vas.mp3"
+        img_url="img/colina.jpg"
         sinopsis="La letra no se enfoca en un drama escandaloso de traición, sino en la pérdida de las pequeñas rutinas compartidas. El protagonista se pregunta
-	 quién mirará la televisión con él, con quién tomará el café o con quién conversará por las noches."
+   quién mirará la televisión con él, con quién tomará el café o con quién conversará por las noches."
         class="list-group-item playlist-item">
-        Si tú te vas</li>
+         Si tú te vas</li>
 
-	<li audio_url="https://archive.org/download/limon-limonero/Lim%C3%B3n%20Limonero.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://archive.org/download/limon-limonero/Lim%C3%B3n%20Limonero.mp3"
+        img_url="img/henry.jpg"
         sinopsis="La letra invita a disfrutar de los pequeños placeres y de la sencillez de la vida a través de la figura del limón (con frases icónicas como "Mi limón, mi limonero, entero me gusta más"),
         usando un estribillo sumamente contagioso que mezcla expresiones en varios idiomas, como un inglés diciendo "yeah, yeah" y un francés diciendo "oh lala"."
         class="list-group-item playlist-item">
-        Mi Limón mi Limonero</li>
+         Mi Limón mi Limonero</li>
 
-	<li audio_url="https://archive.org/download/kiara-que-bello-hd-1/Kiara%20-%20Que%20Bello%20%28HD%29%281%29.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://archive.org/download/kiara-que-bello-hd-1/Kiara%20-%20Que%20Bello%20%28HD%29%281%29.mp3"
+        img_url="img/kiara.jpg"
         sinopsis="La letra narra la historia de una mujer que intenta marcharse o terminar una relación apasionada, pero se ve atrapada por el deseo y la atracción física que siente hacia su pareja, 
-	el coro resalta la entrega total, el recuerdo del cuerpo compartido y la chispa de los celos masculinos que reavivan la llama antes de cada partida"
+ el coro resalta la entrega total, el recuerdo del cuerpo compartido y la chispa de los celos masculinos que reavivan la llama antes de cada partida"
         class="list-group-item playlist-item">
-        Que bello</li>
+         Que bello</li>
 
-	<li audio_url="https://archive.org/download/Papachongo/Papachongo.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://archive.org/download/Papachongo/Papachongo.mp3"
+        img_url="img/diveana.jpg"
         sinopsis="Papachongo es una famosa canción de tecnomerengue y merengue romántico, es una celebración vibrante, juguetona y apasionada del deseo, el romance y la atracción física, 
-	a través de un ritmo sumamente bailable y pegajoso, la letra narra la urgencia e intensidad de una mujer que expresa sin rodeos la profunda adoración y el anhelo de afecto que siente hacia su amante."
+ a través de un ritmo sumamente bailable y pegajoso, la letra narra la urgencia e intensidad de una mujer que expresa sin rodeos la profunda adoración y el anhelo de afecto que siente hacia su amante."
         class="list-group-item playlist-item">
-        Papachongo</li>
+         Papachongo</li>
 
-	<li audio_url="https://archive.org/download/desesperanza_202610/Desesperanza.mp3"
-        img_url="https://lorempixel.com/400/400/cats/3"
+ <li audio_url="https://archive.org/download/desesperanza_202610/Desesperanza.mp3"
+        img_url="img/alfredo.jpg"
         sinopsis="Desesperanza es un emblemático bolero venezolano cuya sinopsis argumental narra el lamento desgarrador y la súplica de un amante tras la partida repentina de su pareja, el tema inicia con una promesa de eternidad. A pesar de que el destino ha separado físicamente a los amantes obligándolos a tomar rumbos distintos ("aunque por otros caminos nos lleve el destino"), 
-	el narrador asegura que el vínculo es imborrable, comparando el sentimiento con un "tatuaje de sol" grabado en el alma."
+ el narrador asegura que el vínculo es imborrable, comparando el sentimiento con un "tatuaje de sol" grabado en el alma."
         class="list-group-item playlist-item">
-        Desesperanza</li>
+         Desesperanza</li>
       </ul>
       </div>
-  
-  <audio id="audio-player" class="d-none" src="" type="audio/mp3" controls="controls"></audio>
+ 
+ <audio id="audio-player" class="d-none" src="" type="audio/mp3" controls="controls"></audio>
 </section>   
 </div>
 </div>
-</main>       
+</main>      
+
+<!-- FOOTER CON IMAGEN CENTRADA -->
+<footer class="text-center py-4">
+    <div class="container">
+        <img src="img/logo.png" alt="Footer Image" class="img-fluid" style="max-height: 100px;">
+    </div>
+</footer>
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
 <script src="js/jquery-ui-slider.js" charset="utf-8"></script>
 <script src="js/audioPlayer.js" charset="utf-8"></script>
 
 <script type="text/javascript">
   $(document).ready(function() {
-    function actualizarSinopsis() {
-      var sinopsisActual = $('.playlist-item.active').attr('sinopsis');
+    function actualizarInfoCancion() {
+      var itemActivo = $('.playlist-item.active');
+
+      // Actualizar sinopsis
+      var sinopsisActual = itemActivo.attr('sinopsis');
       if (sinopsisActual) {
         $('#sinopsis').text(sinopsisActual);
       } else {
         $('#sinopsis').text('');
       }
+
+      // NUEVO: Actualizar la imagen dinámica con el atributo img_url del li activo
+      var imgActual = itemActivo.attr('img_url');
+      if (imgActual) {
+        $('#current-song-img').attr('src', imgActual);
+      } else {
+        $('#current-song-img').attr('src', '');
+      }
     }
 
-    actualizarSinopsis();
+    // Ejecutar al iniciar
+    actualizarInfoCancion();
 
+    // Actualizar al hacer clic en cualquier canción de la lista
     $('.playlist-item').on('click', function() {
-      setTimeout(actualizarSinopsis, 50);
+      setTimeout(actualizarInfoCancion, 50);
     });
 
+    // Actualizar al presionar el botón next
     $('#next-button').on('click', function() {
-      setTimeout(actualizarSinopsis, 50);
+      setTimeout(actualizarInfoCancion, 50);
     });
   });
 </script>
 </body>
 </html>
-
