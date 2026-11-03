@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/flick/jquery-ui.css">
@@ -13,23 +12,19 @@
   <title>Musica Venezolana</title>
 <style>
      body {
-         /* Color café claro / Beige cálido */
          background-color: #ffffff;  
      }
      .hero-header {
          position: relative;
          width: 100vw;               
-         height: 580px;               
-         margin-left: calc(-50vw + 50%);              
-         margin-right: calc(-50vw + 50%);             
-         margin-bottom: 2rem;                                 
+         height: 580px;              
+         margin-left: calc(-50vw + 50%);               
+         margin-right: calc(-50vw + 50%);            
+         margin-bottom: 2rem;                                                  
          background-image: url('img/fondomusica.png');                            
-         /* 'contain' muestra la imagen completa sin recortarla */
-         background-size: contain;            
+         background-size: contain;           
          background-position: center;                
-         /* Evita que la imagen se multiplique si sobra espacio */
-         background-repeat: no-repeat;               
-         /* Color de respaldo por si queda espacio a los lados */
+         background-repeat: no-repeat;              
          background-color: #2b1d14;          
          display: flex;
          align-items: center;
@@ -52,15 +47,15 @@
          box-shadow: 0 8px 20px rgba(0,0,0,0.15);
      }
 
-     /* CORREGIDO: Reducido a la mitad de su tamaño anterior y alineados horizontalmente */
+     /* Botones alineados horizontalmente */
      .play-pause, #next-button {
-         font-size: 5.5rem !important; /* Reducido para que se vea pequeño y estético */
-         cursor: pointer;            /* Hace que aparezca la mano al pasar el mouse */
-         display: inline-flex;       /* Asegura que fluyan uno al lado del otro */
+         font-size: 5.5rem !important; 
+         cursor: pointer;            
+         display: inline-flex;       
          vertical-align: middle;
      }
 
-     /* NUEVO: Estilo para el cuadro contenedor de la imagen junto al botón next */
+     /* Contenedor de la imagen dinámica */
      .song-image-container {
          width: 200px;
          height: 200px;
@@ -77,10 +72,26 @@
          object-fit: cover;
      }
 
-     /* ADAPTACIÓN PARA CELULARES (Pantallas menores a 768 píxeles de ancho) */
+     /* Tamaño de la sinopsis para pantallas normales (computadoras) a 5rem */
+     #sinopsis {
+         font-size: 0.9rem !important;
+     }
+
+     /* Mantiene el reproductor superior fijo al bajar */
+     .sticky-player-top {
+         position: -webkit-sticky;
+         position: sticky;
+         top: 0;
+         z-index: 1000;
+         background-color: #fff8f0; 
+         padding-top: 5px;
+         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+     }
+
+     /* ADAPTACIÓN PARA CELULARES */
      @media (max-width: 768px) {
          .hero-header {
-             height: 180px; /* Reducimos la altura a 180px para que no sobre espacio en el celular */
+             height: 180px; 
          }
 
          .hero-header h1 {
@@ -90,15 +101,35 @@
          .hero-header p {
              font-size: 0.9rem;
          }
+
+         /* Título del repertorio más pequeño en celular */
+         .sticky-player-top h2 {
+             font-size: 1.2rem !important;
+         }
              
-         /* CORREGIDO: Tamaño adaptado para móviles manteniendo la posición horizontal */
+         /* Botones más compactos en celular */
          .play-pause, #next-button {
-             font-size: 3.5rem !important;
+             font-size: 2.8rem !important;
          }
 
+         /* Imagen de la canción más pequeña */
          .song-image-container {
-             width: 150px;
-             height: 150px;
+             width: 80px;
+             height: 80px;
+         }
+
+         /* Reducir texto "ahora sonando" y título de la canción */
+         #now-playing .lead {
+             font-size: 0.9rem !important;
+             margin-bottom: 0.2rem !important;
+         }
+
+         /* Sinopsis adaptada para que no sea gigante en celulares */
+         #sinopsis {
+             font-size: 0.75rem !important;
+             line-height: 1.2;
+             max-height: 60px;
+             overflow-y: auto;
          }
      }
 
@@ -115,225 +146,171 @@
          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
      }
 </style>
- 
 </head>
 <body>
 <!-- Imagen de encabezado -->
     <header class="hero-header">
         <div class="hero-overlay"></div>
-        <div class="hero-content text-center text-white">
-            <!-- Puedes poner texto aquí si lo deseas -->
-        </div>
+        <div class="hero-content text-center text-white"></div>
     </header>
+
     <!-- Listado del Repertorio de Canciones -->
-     
-    <main class="mb-5">        <!-- contenedor principal -->
-     
+    <main class="mb-5 container">        
         <div class="list-group shadow">
-            <!-- Canción 1 (Con tu enlace de Google Drive integrado) -->
-            <div class="list-group-item song-card d-flex flex-column flex-md-row justify-content-between align-items-md-center p-3 mb-2 rounded">
-                <section class="audio-player card w-100" style="margin-top:20px">      
-    <div class="card w-100"> 
-      <div class="card text-center">
-      <div class="card-header">
-    <h2>Repertorio Musical Venezolano</h2>
-  </div>
-  </div>
-      <div class="card-body">
-        <!-- Contenedor de botones: Ya usan clases de Bootstrap para estar alineados horizontalmente -->
-        <div class="row align-items-center mt-4 mb-3 mx-0">
-          <i id="play-button" class="material-icons play-pause text-primary mr-2" aria-hidden="true">play_circle_outline</i>
-          <i id="pause-button" class="material-icons play-pause d-none text-primary mr-2" aria-hidden="true">pause_circle_outline</i>
-          <i id="next-button" class="material-icons text-primary ml-2 mr-3" aria-hidden="true">skip_next</i>
-          
-          <!-- NUEVO: Cuadro contenedor para la imagen dinámica al lado de next-button -->
-          <div class="song-image-container ml-2">
-              <img id="current-song-img" src="" alt="Carátula de la canción">
-          </div>
+            <div class="list-group-item song-card d-flex flex-column p-3 mb-2 rounded">
+                
+                <section class="audio-player card w-100 border-0 bg-transparent" style="margin-top:0px">      
+                    <div class="card w-100 border-0 bg-transparent"> 
+                      
+                      <!-- BLOQUE FIJO SUPERIOR -->
+                      <div class="sticky-player-top">
+                          <div class="card text-center border-0 bg-transparent">
+                              <div class="card-header border-0 bg-transparent py-1">
+                                <h2>Repertorio Musical Venezolano</h2>
+                              </div>
+                          </div>
+                          <div class="card-body py-1">
+                            <!-- Contenedor de botones -->
+                            <div class="row align-items-center mt-1 mb-2 mx-0 justify-content-center">
+                              <i id="play-button" class="material-icons play-pause text-primary mr-2" aria-hidden="true">play_circle_outline</i>
+                              <i id="pause-button" class="material-icons play-pause d-none text-primary mr-2" aria-hidden="true">pause_circle_outline</i>
+                              <i id="next-button" class="material-icons text-primary ml-2 mr-3" aria-hidden="true">skip_next</i>
+                              
+                              <!-- Cuadro contenedor para la imagen dinámica -->
+                              <div class="song-image-container ml-2">
+                                  <img id="current-song-img" src="" alt="Carátula de la canción">
+                              </div>
+                            </div>
+                            <div class="p-0 m-0 text-center" id="now-playing">
+                              <p class="font-italic mb-0" style="font-size: 0.8rem;">ahora sonando: </p>
+                              <p class="lead font-weight-bold" id="title"></p>
+                              <p class="lead font-italic text-muted" id="sinopsis"></p>
+                            </div>
+                            <div class="progress-bar progress col-12 mb-2" style="height: 6px;"></div>
+                          </div>
+                      </div>
+                      <!-- FIN DEL BLOQUE FIJO -->
+
+                      <!-- LISTADO DE CANCIONES -->
+                      <ul class="playlist list-group list-group-flush mt-2">
+                        <li audio_url="https://archive.org/download/besame_202611/besame.mp3"
+                        img_url="img/ricardo.jpg"
+                        sinopsis="La canción Bésame trata sobre la entrega total, la sensualidad poética y el poder transformador del amor de pareja.
+A diferencia de las baladas románticas tradicionales que hablan de nostalgia o desamor, este tema se enfoca en el acto del beso como un vehículo místico y físico para la unión de dos personas."
+                        class="active list-group-item playlist-item">
+                        Bésame</li>
+
+                        <li audio_url="https://archive.org/download/me-va-a-extranar/Me%20va%20a%20extra%C3%B1ar.mp3"
+                        img_url="img/ricardo.jpg"
+                        sinopsis="Me va a extrañar trata sobre el profundo arrepentimiento y la dolorosa certeza de perder al amor de la vida por errores propios.
+La letra describe la melancolía de un hombre que ve marchar a su pareja, reconociendo que ella intentará rehacer su vida con otra persona"
+                      class="list-group-item playlist-item">
+                        Me va a Extrañar</li>
+
+                        <li audio_url=""
+                        img_url="img/franco.jpg"
+                        sinopsis="La canción narra el dolor y la resignación de un hombre que ve cómo su pareja decide marcharse, en lugar de intentar retenerla a la fuerza o guardar rencor, el protagonista acepta la decisión con  dignidad y reconoce que debe dejar ir a la persona amada."
+                        class="list-group-item playlist-item">
+                        Buen Perdedor</li>
+
+                        <li audio_url="https://ia601800.us.archive.org/18/items/ansiedad_202610/Ansiedad.mp3"
+                        img_url="img/Nat King Cole.jpg"
+                        sinopsis="La canción «Ansiedad» fue escrita en 1955 por el compositor venezolano José Enrique «Chelique» Sarabia y fue grabada y popularizada por Nat King Cole en 1958."
+                        class="list-group-item playlist-item">
+                        Ansiedad</li>
+
+                        <li audio_url="https://dn721908.ca.archive.org/0/items/te-amo_202610/Te%20Amo.mp3"
+                        img_url="img/franco.jpg"
+                        sinopsis="Balada romántica que narra la intensidad y la urgencia de confesar un amor profundo."
+                        class="list-group-item playlist-item">
+                         Te amo</li>
+
+                         <li audio_url="https://dn720602.ca.archive.org/0/items/perla-negra/Perla%20Negra.mp3"
+                        img_url="img/yordano.jpg"
+                        sinopsis="Balada sumamente íntima y poética que habla de la melancolía y el desamor de Yordano."
+                        class="list-group-item playlist-item">
+                         Perla Negra</li>
+
+                         <li audio_url="https://archive.org/download/te-juro-que-te-amo_202610/Te%20Juro%20Que%20Te%20Amo.mp3"
+                        img_url="img/terricolas.jpg"
+                        sinopsis="Balada que narra una dolorosa y dramática despedida en una estación de tren."
+                        class="list-group-item playlist-item">
+                         Te Juro que te Amo</li>
+
+                        <li audio_url=""
+                        img_url="img/terricolas.jpg"
+                        sinopsis="La letra de Luto en mi alma habla sobre la devastación emocional de descubrir una traición 
+                        amorosa de forma repentina e inesperada. La canción utiliza el concepto del luto que normalmente se asocia con la muerte de una persona
+                       como una metáfora para expresar que la ilusión, el amor y la confianza del protagonista han muerto"
+                        class="list-group-item playlist-item">
+                        Luto en el alma</li>
+
+                        <li audio_url=""
+                        img_url="img/jose.jpg"
+                        sinopsis="La canción trata sobre la dolorosa revelación de un hombre que descubre que, a pesar de tener una relación íntima y apasionada con su pareja, 
+                        ella nunca le ha entregado su verdadero amor ni su alma."
+                        class="list-group-item playlist-item">
+                        Dueño de nada</li>
+
+                        <li audio_url=""
+                        img_url="img/carlos.jpg"
+                        sinopsis="Mi vida eres tú trata sobre la dependencia emocional absoluta, la devoción ciega y el miedo profundo a perder a la persona amada.
+A través de su letra, la canción describe una relación donde una de las partes ha entregado por completo su identidad y su felicidad al otro, convirtiéndolo en el centro de su existencia."
+                        class="list-group-item playlist-item">
+                        Mi vida eres tu</li>
+
+                        <li audio_url=""
+                        img_url="img/carlos.jpg"
+                        sinopsis="La canción trata sobre la imposibilidad de explicar el amor de forma lógica y racional, concluyendo que se ama a alguien simplemente por ser quien es y por 
+                        la historia compartida."
+                        class="list-group-item playlist-item">
+                        Que por qué te quiero </li>
+
+                        <li audio_url=""
+                        img_url="img/kiarayguillermo.jpg"
+                        sinopsis="Tesoro Mío trata sobre el doloroso secreto de una mujer que, a pesar de estar con un hombre bueno que la ama, no puede olvidar a un viejo amor que ha vuelto a aparecer en su vida.
+La canción se desarrolla como una íntima y dramática discusión de cama."
+                        class="list-group-item playlist-item">
+                        Tesoro mío</li>
+
+                        <li audio_url=""
+                        img_url="img/karina.jpg"
+                        sinopsis="La canción A quién es un tema de desamor y orgullo herido que habla sobre el d
+                        olor de una ruptura y el proceso de confrontar a una expareja que intenta regresar."
+                        class="list-group-item playlist-item">
+                        A quien</li>
+
+                        <li audio_url=""
+                        img_url="img/oscar.jpg"
+                        sinopsis="Esta canción se convirtió en un himno de la salsa gracias a su ritmo contagioso y, 
+                        sobre todo, por su letra con un fuerte mensaje de respeto, amor y consideración hacia la mujer"
+                        class="list-group-item playlist-item">
+                        Detalles</li>
+
+                        <li audio_url=""
+                        img_url="img/dimension.jpg"
+                        sinopsis="La canción Taboga trata sobre la nostalgia, el desamor y la melancólica belleza de la isla 
+                        de Taboga (ubicada en Panamá). El tema fusiona la admiración por este paisaje tropical con el dolor de un hombre que sufre por un amor perdido."
+                        class="list-group-item playlist-item">
+                        Taboga</li>
+
+                        <li audio_url="https://archive.org/download/limon-limonero/Lim%C3%B3n%20Limonero.mp3"
+                        img_url="img/henry.jpg"
+                        sinopsis="La letra invita a disfrutar de los pequeños placeres y de la sencillez de la vida a través de la figura del limón (con frases icónicas
+                       como Mi limón, mi limonero, entero me gusta más, usando un estribillo sumamente contagioso que mezcla expresiones en varios idiomas, como un inglés diciendo yeah, yeah y un francés diciendo oh lala."
+                        class="list-group-item playlist-item">
+                         Mi Limón mi Limonero</li>
+                      </ul>
+
+                    </div>
+                    <audio id="audio-player" class="d-none" src="" type="audio/mp3" controls="controls"></audio>
+                </section>   
+
+            </div>
         </div>
-        <div class="p-0 m-0" id="now-playing">
-          <p class="font-italic mb-0">ahora sonando: </p>
-          <p class="lead" id="title"></p>
-          <p class="lead font-italic text-muted" id="sinopsis" style="font-size: 1rem;"></p>
-        </div>
-        <div class="progress-bar progress col-12 mb-3">
-        </div>
-      </div>
-      <ul class="playlist list-group list-group-flush">
-        <li audio_url="https://ia601800.us.archive.org/18/items/ansiedad_202610/Ansiedad.mp3"
-        img_url="img/Nat King Cole.jpg"
-        sinopsis="La canción «Ansiedad» fue escrita en 1955 por el compositor venezolano José Enrique «Chelique» Sarabia y fue grabada y popularizada por Nat King Cole en 1958 (formando parte de su álbum Cole Español / To My Friends) y lanzada internacionalmente en 1959."
-        class="active list-group-item playlist-item">
-        Ansiedad</li>
-        
-        <li audio_url="https://ia601904.us.archive.org/16/items/en-carne-viva_202610/En%20Carne%20Viva.mp3"
-        img_url="img/scarleth.jpg"
-        sinopsis="En Carne Viva es un emblemático tema de la música llanera venezolana, interpretado por la cantante Scarlett Linares (conocida como La Guayanesa de Oro) y compuesto originalmente por el músico Manolo Aldana.
-         La canción fue grabada en el  año 2003, convirtiéndose en el mayor éxito de la carrera de la artista y en un clásico del folclor contemporáneo."
-        class="list-group-item playlist-item">
-        En Carne Viva </li>
-        
-        <li audio_url="https://ia601001.us.archive.org/18/items/mi-burrito-sabanero_202610/Mi%20burrito%20Sabanero.mp3"
-        img_url="img/simon.jpg"
-        sinopsis="Conocido originalmente como El burrito de Belén, es un famoso villancico navideño venezolano. Fue grabada primero por el folclorista venezolano Simón Díaz, incluida en su disco Las gaitas de Simón y 
-        luego se grabó con el grupo musical infantil venezolano La Rondallita en noviembre de 1975 con la voz solista del niño Ricardo Cuenci, siendo esta última versión la que alcanzó gran popularidad en varios países de Hispanoamérica y Europa."
-        class="list-group-item playlist-item">
-       Mi Burrito Sabanero </li>
+    </main>      
 
-       <li audio_url="https://ia601608.us.archive.org/28/items/lloraras_202610/Lloraras.mp3"
-        img_url="img/oscar.jpg"
-        sinopsis="Surgió de manera espontánea una noche de inspiración de Oscar D'León en Caracas, Venezuela. 
-        Se convirtió en el primer gran éxito internacional del artista, catapultándolo a la fama mundial como «El Sonero del Mundo». Es un clásico de la salsa que narra una historia de desamor, despecho y advertencia emocional."
-        class="list-group-item playlist-item">
-       Lloraras </li>
-
-       <li audio_url="https://ia601406.us.archive.org/17/items/ano-nuevo/A%C3%B1o%20nuevo.mp3"
-        img_url="img/cheo.jpg"
-        sinopsis="Aunque fue popularizada masivamente por Billo’s Caracas Boys, la composición es obra del periodista y compositor 
-        colombiano Pedro Juan Meléndez Comas (originario de Barranquilla). Durante mucho tiempo apareció en los discos bajo la denominación DRA (Derecho Reservado de Autor) por un error de imprenta de la disquera."
-        class="list-group-item playlist-item">
-       Año Nuevo </li>
-
-       <li audio_url="https://ia600407.us.archive.org/10/items/canto-a-caracas/canto%20a%20caracas.mp3"
-        img_url="img/billo.jpg"
-        sinopsis="Popularizada por la orquesta Billo's Caracas Boys (con voces como Cheo García y Felipe Pirela) y versionada por diversos artistas como Simón Díaz o La Lupe. La letra expresa el profundo afecto,
-         agradecimiento y sentido de pertenencia del autor hacia Caracas, la ciudad donde vivió gran parte de su vida.  En su estrofa más famosa, la canción refleja un emotivo deseo del autor, quien pide que al morir no le reciten una oración sobre su tumba, sino que se escuche el último compás de Alma llanera."
-        class="list-group-item playlist-item">
-       Cantos a Caracas </li>
-
- <li audio_url="https://dn711409.ca.archive.org/0/items/pavo-real/Pavo%20Real.mp3"
-        img_url="img/jose.jpg"
-        sinopsis="La letra es una sátira o reflexión social acerca de la burocracia, las formalidades, la ostentación y los pormenores de los preparativos matrimoniales. Está compuesta bajo la estructura del 
-        "seis numerao" (un tipo de joropo tradicional venezolano en compás de 6/8). El término "numerao" hace referencia a la métrica musical y a los versos repetitivos que El Puma inmortalizó en los coros."
-        class="list-group-item playlist-item">
-       Pavo Real</li>
-
- <li audio_url="https://dn721807.ca.archive.org/0/items/de-sol-a-sol/De%20sol%20a%20sol.mp3"
-        img_url="img/salserin.jpg"
-        sinopsis="Estos temas son algunos de los éxitos más grandes e icónicos de la famosa agrupación venezolana de salsa infantil y juvenil Salserín, grabados a mediados de la década de 1996 bajo la composición y arreglos de músicos como Manuel Guerra y William Luque. Las canciones alcanzaron una enorme 
-        popularidad en toda Latinoamérica y se han mantenido como clásicos de la salsa romántica en nuestro idioma."
-        class="list-group-item playlist-item">
-         De sol a sol</li>
-
- <li audio_url="https://dn710102.ca.archive.org/0/items/yo-sin-ti/Yo%20Sin%20Ti.mp3"
-        img_url="img/salserin.jpg"
-        sinopsis="Estos temas son algunos de los éxitos más grandes e icónicos de la famosa agrupación venezolana de salsa infantil y juvenil Salserín, grabados a mediados de la década de 1996 bajo la composición y arreglos de músicos como Manuel Guerra y William Luque. Las canciones alcanzaron una enorme 
-        popularidad en toda Latinoamérica y se han mantenido como clásicos de la salsa romántica en nuestro idioma."
-        class="list-group-item playlist-item">
-         Yo sin ti</li>
-
- <li audio_url="https://dn711003.ca.archive.org/0/items/un-amor-como-el-nuestro/Un%20Amor%20Como%20El%20Nuestro.mp3"
-        img_url="img/salserin.jpg"
-        sinopsis="Estos temas son algunos de los éxitos más grandes e icónicos de la famosa agrupación venezolana de salsa infantil y juvenil Salserín, grabados a mediados de la década de 1996 bajo la composición y arreglos de músicos como Manuel Guerra y William Luque. Las canciones alcanzaron una enorme 
-        popularidad en toda Latinoamérica y se han mantenido como clásicos de la salsa romántica en nuestro idioma."
-        class="list-group-item playlist-item">
-         Un amor como el Nuestro</li>
-
- <li audio_url="https://dn720602.ca.archive.org/0/items/perla-negra/Perla%20Negra.mp3"
-        img_url="img/yordano.jpg"
-        sinopsis="La letra retrata la historia y el mundo de una trabajadora sexual que ofrece sus servicios a un cliente. 
- Genero:Pop rock/balada urbana con influencias acústicas y eléctricas. Es una balada sumamente íntima y poética que habla de la melancolía, el desamor y el desahogo emocional tras una noche nostálgica. Estas canciones del mismo artista te van a fascinar porque comparten esa fusión perfecta de pop, ritmos caribeños, melancolía y letras urbanas"
-        class="list-group-item playlist-item">
-         Perla Negra</li>
-
- <li audio_url="https://dn711002.ca.archive.org/0/items/manantial-de-corazon/Manantial%20de%20Coraz%C3%B3n.mp3"
-        img_url="img/yordano.jpg"
-        sinopsis="La letra retrata la historia y el mundo de una trabajadora sexual que ofrece sus servicios a un cliente. 
- Genero:Pop rock/balada urbana con influencias acústicas y eléctricas. Es una balada sumamente íntima y poética que habla de la melancolía, el desamor y el desahogo emocional tras una noche nostálgica. Estas canciones del mismo artista te van a fascinar porque comparten esa fusión perfecta de pop, ritmos caribeños, melancolía y letras urbanas"
-        class="list-group-item playlist-item">
-         Manantial de Corazón</li>
-
- <li audio_url="https://dn720005.ca.archive.org/0/items/una-carta_202610/Una%20Carta.mp3"
-        img_url="img/terricolas.jpg"
-        sinopsis="Es una obra de ficción con una introducción hablada que hizo que el público creyera que se trataba de una vivencia real sobre un amor prohibido y la culpa."
-        class="list-group-item playlist-item">
-         La carta</li>
-
- <li audio_url="https://archive.org/download/te-juro-que-te-amo_202610/Te%20Juro%20Que%20Te%20Amo.mp3"
-        img_url="img/terricolas.jpg"
-        sinopsis="La letra de la balada narra una dolorosa y dramática despedida en una estación de tren Está lloviendo y una persona ve partir a su ser amado en un tren, A pesar del sufrimiento y la distancia, el protagonista jura fidelidad eterna y asegura que su amor no cambiará jamás."
-        class="list-group-item playlist-item">
-         Te Juro que te Amo</li>
-
- <li audio_url="https://ia801804.us.archive.org/34/items/cancion-para-ti/Canci%C3%B3n%20para%20ti.mp3"
-        img_url="img/frank.jpg"
-        sinopsis="La letra describe un deseo profundo de conectar con la persona amada a través del mundo,  de los sueños, donde las barreras físicas desaparecen, la canción mezcla ternura con un toque de tristeza y nostalgia, reconociendo
-        el impacto de la separación y pidiendo a la otra persona que guarde la promesa de un recuerdo mutuo."
-        class="list-group-item playlist-item">
-         Canción Para Ti</li>
-
- <li audio_url="https://dn721901.ca.archive.org/0/items/un-buen-perdedor/Un%20buen%20perdedor.mp3"
-        img_url="img/franco.jpg"
-        sinopsis="La canción narra el dolor y la resignación de un hombre que ve cómo su pareja decide marcharse, en lugar de intentar retenerla a la fuerza o guardar rencor, 
-        el protagonista acepta la decisión con dignidad y reconoce que debe dejar ir a la persona amada"
-        class="list-group-item playlist-item">
-         Un buen perdedor</li>
-
- <li audio_url="https://dn721809.ca.archive.org/0/items/solo-importas-tu/SOLO%20IMPORTAS%20TU.mp3"
-        img_url="img/franco.jpg"
-        sinopsis="El tema es una balada romántica introspectiva en la que el narrador pide perdón por haber herido a su pareja, 
-        admitiendo que no supo valorar su presencia ni el dolor que ella soportaba en silencio, de su álbum Fantasía"
-        class="list-group-item playlist-item">
-         Solo faltas tú</li>
-
- <li audio_url="https://dn721908.ca.archive.org/0/items/te-amo_202610/Te%20Amo.mp3"
-        img_url="img/franco.jpg"
-        sinopsis="Es una balada romántica que narra la intensidad, la vulnerabilidad y la urgencia de 
-       confesar un amor profundo ante la incertidumbre del tiempo, álbum Al Norte Del Sur"
-        class="list-group-item playlist-item">
-         Te amo</li>
-
- <li audio_url="https://dn720006.ca.archive.org/0/items/eres-una-en-un-millon-ilan-chester/Eres%20una%20en%20un%20millon%20Ilan%20Chester.mp3"
-        img_url="img/Ilan.jpg"
-        sinopsis="La letra expresa una profunda admiración y gratitud hacia una persona especial cuya presencia trae paz y alegría.
-      Compara a la persona amada con las estrellas y el sol, destacando que brilla con mucha más fuerza e importancia que cualquier otra cosa a su alrededor."
-        class="list-group-item playlist-item">
-         Eres una en un millón</li>
-
- <li audio_url="https://archive.org/download/si-tu-te-vas_202610/Si%20T%C3%BA%20Te%20Vas.mp3"
-        img_url="img/colina.jpg"
-        sinopsis="La letra no se enfoca en un drama escandaloso de traición, sino en la pérdida de las pequeñas rutinas compartidas. El protagonista se pregunta
-   quién mirará la televisión con él, con quién tomará el café o con quién conversará por las noches."
-        class="list-group-item playlist-item">
-         Si tú te vas</li>
-
- <li audio_url="https://archive.org/download/limon-limonero/Lim%C3%B3n%20Limonero.mp3"
-        img_url="img/henry.jpg"
-        sinopsis="La letra invita a disfrutar de los pequeños placeres y de la sencillez de la vida a través de la figura del limón (con frases icónicas como "Mi limón, mi limonero, entero me gusta más"),
-        usando un estribillo sumamente contagioso que mezcla expresiones en varios idiomas, como un inglés diciendo "yeah, yeah" y un francés diciendo "oh lala"."
-        class="list-group-item playlist-item">
-         Mi Limón mi Limonero</li>
-
- <li audio_url="https://archive.org/download/kiara-que-bello-hd-1/Kiara%20-%20Que%20Bello%20%28HD%29%281%29.mp3"
-        img_url="img/kiara.jpg"
-        sinopsis="La letra narra la historia de una mujer que intenta marcharse o terminar una relación apasionada, pero se ve atrapada por el deseo y la atracción física que siente hacia su pareja, 
- el coro resalta la entrega total, el recuerdo del cuerpo compartido y la chispa de los celos masculinos que reavivan la llama antes de cada partida"
-        class="list-group-item playlist-item">
-         Que bello</li>
-
- <li audio_url="https://archive.org/download/Papachongo/Papachongo.mp3"
-        img_url="img/diveana.jpg"
-        sinopsis="Papachongo es una famosa canción de tecnomerengue y merengue romántico, es una celebración vibrante, juguetona y apasionada del deseo, el romance y la atracción física, 
- a través de un ritmo sumamente bailable y pegajoso, la letra narra la urgencia e intensidad de una mujer que expresa sin rodeos la profunda adoración y el anhelo de afecto que siente hacia su amante."
-        class="list-group-item playlist-item">
-         Papachongo</li>
-
- <li audio_url="https://archive.org/download/desesperanza_202610/Desesperanza.mp3"
-        img_url="img/alfredo.jpg"
-        sinopsis="Desesperanza es un emblemático bolero venezolano cuya sinopsis argumental narra el lamento desgarrador y la súplica de un amante tras la partida repentina de su pareja, el tema inicia con una promesa de eternidad. A pesar de que el destino ha separado físicamente a los amantes obligándolos a tomar rumbos distintos ("aunque por otros caminos nos lleve el destino"), 
- el narrador asegura que el vínculo es imborrable, comparando el sentimiento con un "tatuaje de sol" grabado en el alma."
-        class="list-group-item playlist-item">
-         Desesperanza</li>
-      </ul>
-      </div>
- 
- <audio id="audio-player" class="d-none" src="" type="audio/mp3" controls="controls"></audio>
-</section>   
-</div>
-</div>
-</main>      
-
-<!-- FOOTER CON IMAGEN CENTRADA -->
+<!-- FOOTER -->
 <footer class="text-center py-4">
     <div class="container">
         <img src="img/logo.png" alt="Footer Image" class="img-fluid" style="max-height: 100px;">
@@ -349,7 +326,6 @@
     function actualizarInfoCancion() {
       var itemActivo = $('.playlist-item.active');
 
-      // Actualizar sinopsis
       var sinopsisActual = itemActivo.attr('sinopsis');
       if (sinopsisActual) {
         $('#sinopsis').text(sinopsisActual);
@@ -357,7 +333,6 @@
         $('#sinopsis').text('');
       }
 
-      // NUEVO: Actualizar la imagen dinámica con el atributo img_url del li activo
       var imgActual = itemActivo.attr('img_url');
       if (imgActual) {
         $('#current-song-img').attr('src', imgActual);
@@ -366,15 +341,12 @@
       }
     }
 
-    // Ejecutar al iniciar
     actualizarInfoCancion();
 
-    // Actualizar al hacer clic en cualquier canción de la lista
     $('.playlist-item').on('click', function() {
       setTimeout(actualizarInfoCancion, 50);
     });
 
-    // Actualizar al presionar el botón next
     $('#next-button').on('click', function() {
       setTimeout(actualizarInfoCancion, 50);
     });
